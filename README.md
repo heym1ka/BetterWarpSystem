@@ -1,2 +1,8 @@
-# warppl
-Ein Normales WarpSystem ohne Prefix, ohne Credits, mit commands (Free to use)
+# WarpPlugin - 1.20.1
+- Free to use
+- No Credits
+- No Prefixes
+- No Brodcastmessages
+
+## Version: 1.0
+## Minecraft Version: 1.20.1
