@@ -4,5 +4,7 @@
 - No Prefixes
 - No Brodcastmessages
 
-## Version: 1.0
-## Minecraft Version: 1.20.1
+## Versions
+### Minecraft Version: 1.20.1
+### Plugin Version: 1
+### Updates: Soon...
