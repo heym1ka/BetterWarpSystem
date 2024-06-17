@@ -11,7 +11,7 @@ public class DeleteWarpCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player p = (Player) sender;
-        if (p.hasPermission("warpsys.delete")) {
+        if (p.hasPermission("warpsystem.delete") || p.hasPermission("warpsystem.*")) {
             if (args.length == 1) {
                 File file = new File("./plugins/WarpSys/warplocations" + File.separator + args[0].toLowerCase() + ".yml");
                 if (file.exists()) {

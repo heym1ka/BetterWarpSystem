@@ -13,7 +13,7 @@ public class WarplistCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player p = (Player) sender;
-        if (p.hasPermission("warpsys.list")) {
+        if (p.hasPermission("warpsystem.list") || p.hasPermission("warpsystem.*")) {
             if (args.length == 0) {
                 File adir = new File("./plugins/WarpSys/warplocations");
                 if (!adir.exists()) {

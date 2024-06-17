@@ -16,7 +16,7 @@ public class SetWarpCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (p.hasPermission("warpsystem.setwarp")){
+            if (p.hasPermission("warpsystem.setwarp") || p.hasPermission("warpsystem.*")){
                 if(args.length  == 1) {
                     if(Pattern.matches("[a-zA-Z]+", args[0].toLowerCase())){
                         File File = new File("./plugins/WarpSys/warplocations/" + args[0].toLowerCase() + ".yml");

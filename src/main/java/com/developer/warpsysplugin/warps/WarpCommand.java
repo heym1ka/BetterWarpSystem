@@ -16,7 +16,7 @@ public class WarpCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (p.hasPermission("warpsystem.warp")) {
+            if (p.hasPermission("warpsystem.usewarps") || p.hasPermission("warpsystem.*")) {
                 if (args.length == 1) {
                     File file = new File("./plugins/WarpSys/warplocations/" + args[0].toLowerCase() + ".yml");
                     if (file.exists()) {
