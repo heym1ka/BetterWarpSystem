@@ -64,8 +64,8 @@ public class WarpCommand implements CommandExecutor, TabCompleter {
         Location location = new Location(world, x, y, z, yaw, pitch);
         player.teleport(location);
 
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§7Du wurdest zu §8'§a" + warpName.toUpperCase() + "§8' Teleportiert."));
-        player.sendMessage("§7Du wurdest zu §8'§a" + warpName.toUpperCase() + "§8' Teleportiert.");
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§7Du wurdest zu §8'§a" + warpName.toUpperCase() + "§8'§7 Teleportiert."));
+        player.sendMessage("§7Du wurdest zu §8'§a" + warpName.toUpperCase() + "§8'§7 Teleportiert.");
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_TRADE, 1f, 1f);
         return true;
     }
