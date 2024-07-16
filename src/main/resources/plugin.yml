@@ -1,0 +1,18 @@
+name: WarpSysPlugin
+version: '${project.version}'
+main: dev.larrox.warpsysplugin.WarpSysPlugin
+api-version: '1.20'
+author: Larrox
+commands:
+  setwarp:
+    description: setze ein Warp
+    usage: /setwarp <warpname>
+  warp:
+    description: teleportiere dich zu einem existierenden warp
+    usage: /warp <warpname>
+  delwarp:
+    description: Lösche ein Warp
+    usage: /delwarp <warpname>
+  warps:
+    description: zeige alle warps an
+    usage: /warp
