@@ -10,9 +10,9 @@
 ```yml
 Version: 1.20+
 
-Pl Ver: 1.2
+Pl Ver: 1.2.5
 
 Plugin Type: Spigot/Bukkit
 
-Support: discord.gg/larrox
+Support: larrox.xyz/discord
 ```
