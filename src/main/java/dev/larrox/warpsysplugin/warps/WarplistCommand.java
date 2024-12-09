@@ -1,5 +1,6 @@
 package dev.larrox.warpsysplugin.warps;
 
+import dev.larrox.warpsysplugin.WarpSysPlugin;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,27 +10,24 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class WarplistCommand implements CommandExecutor {
-    private static final String WARP_DIRECTORY = "./plugins/WarpSys/warplocations/";
+    private static final String WARP_DIRECTORY = "./plugins/WarpSysPlugin/warplocations/";
+    WarpSysPlugin plugin = WarpSysPlugin.getInstance();
+    String PrimaryColor = plugin.getConfig().getString("color.primary");
+    String SecondaryColor = plugin.getConfig().getString("color.secondary");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§7Nur Spieler Können diesen Command ausführen.");
+            sender.sendMessage(PrimaryColor + " Nur Spieler können diesen Command ausführen.");
             return true;
         }
 
         Player player = (Player) sender;
-        if (!player.hasPermission("warpsystem.list") || !player.hasPermission("warpsystem.*")) {
-            sender.sendMessage("§7Du hast keine Berechtigung, §aWarplist §7zu nutzen.");
-            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
-            return true;
-        }
 
         if (args.length != 0) {
-            sender.sendMessage("§7Nutze §a/warplist§7.");
+            sender.sendMessage(PrimaryColor + " Nutze " + SecondaryColor + "/warplist" + PrimaryColor + ".");
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
             return true;
         }
@@ -50,11 +48,11 @@ public class WarplistCommand implements CommandExecutor {
         }
 
         if (warpList.isEmpty()) {
-            sender.sendMessage("§7Keine Warps gefunden...");
+            sender.sendMessage(PrimaryColor + " Keine Warps gefunden...");
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
         } else {
-            String warps = String.join("§8,§a ", warpList);
-            sender.sendMessage("§7Warps: §a" + warps);
+            String warps = String.join(SecondaryColor + "§8," + SecondaryColor + " ", warpList);
+            sender.sendMessage(PrimaryColor + " Warps: " + SecondaryColor + warps);
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_TRADE, 1f, 1f);
         }
 

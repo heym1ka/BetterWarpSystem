@@ -1,5 +1,7 @@
 package dev.larrox.warpsysplugin.warps;
 
+import dev.larrox.warpsysplugin.WarpSysPlugin;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,33 +13,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteWarpCommand implements CommandExecutor, TabCompleter {
-    private static final String WARP_DIRECTORY = "./plugins/WarpSys/warplocations/";
+    private static final String WARP_DIRECTORY = "./plugins/WarpSysPlugin/warplocations/";
+    WarpSysPlugin plugin = WarpSysPlugin.getInstance();
+    String PrimaryColor = plugin.getConfig().getString("color.primary");
+    String SecondaryColor = plugin.getConfig().getString("color.secondary");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§7Nur Spieler Können diesen Command ausführen.");
+            sender.sendMessage(PrimaryColor + " Nur Spieler können diesen Command ausführen.");
             return true;
         }
 
         Player player = (Player) sender;
-        if (!player.hasPermission("warpsystem.delete") || !player.hasPermission("warpsystem.*")) {
-            player.sendMessage("§7Du hast keine berechtigung, §aWarpRemove §7zu nutzen");
+        if (!player.hasPermission("warpsystem.delete") ||
+                !player.hasPermission("warpsystem.*") ||
+                !player.isOp() ||
+                !player.hasPermission("*")) {
+            player.sendMessage(PrimaryColor + " Du hast keine Berechtigung, " + SecondaryColor + "WarpRemove " + PrimaryColor + "zu nutzen");
             return true;
         }
 
-        String warpName = args[0].toLowerCase();
+        String warpName = args[0];
         File warpFile = new File(WARP_DIRECTORY + warpName + ".yml");
 
-        if (!warpFile.exists() || args.length != 1) {
-            player.sendMessage("§7Dieser Warp Existiert nicht...");
+        if (args.length != 1) {
+            player.sendMessage(PrimaryColor + " Ungültiger Warp...");
+            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
+            return true;
+        }
+
+        if (!warpFile.exists()) {
+            player.sendMessage(PrimaryColor + " Dieser Warp existiert nicht...");
             return true;
         }
 
         if (warpFile.delete()) {
-            player.sendMessage("§7Warp erfolgreich gelöscht");
+            player.sendMessage(PrimaryColor + " Warp erfolgreich gelöscht");
         } else {
-            player.sendMessage("§cEs ist ein Fehler aufgetreten");
+            player.sendMessage(PrimaryColor + " Es ist ein Fehler aufgetreten");
         }
 
         return true;

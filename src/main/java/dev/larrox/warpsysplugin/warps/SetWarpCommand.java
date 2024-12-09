@@ -1,10 +1,12 @@
 package dev.larrox.warpsysplugin.warps;
 
+import dev.larrox.warpsysplugin.WarpSysPlugin;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -12,36 +14,48 @@ import java.io.File;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
-import static org.bukkit.Effect.Type.SOUND;
-
 public class SetWarpCommand implements CommandExecutor {
-    private static final String WARP_DIRECTORY = "./plugins/WarpSys/warplocations/";
-    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z]+");
+    private static final String WARP_DIRECTORY = "./plugins/WarpSysPlugin/warplocations/";
+    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_-]+");
+    WarpSysPlugin plugin = WarpSysPlugin.getInstance();
+    FileConfiguration config = plugin.getConfig();
+    String PrimaryColor = config.getString("color.primary");
+    String SecondaryColor = config.getString("color.secondary");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§7Nur Spieler Können diesen Command ausführen.");
+            sender.sendMessage(PrimaryColor + " Nur Spieler können diesen Command ausführen.");
             return true;
         }
 
         Player player = (Player) sender;
-        if (!player.hasPermission("warpsystem.setwarp") ||!player.hasPermission("warpsystem.*")) {
-            player.sendMessage("§7Du hast keine Berechtigung, §aWarpset §7zu nutzen.");
+
+        if (args.length != 1) {
+            player.sendMessage(PrimaryColor + " Ungültiger Warp...");
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
             return true;
         }
 
-        String warpName = args[0].toLowerCase();
-        if (!VALID_NAME_PATTERN.matcher(warpName).matches() || args.length != 1) {
-            player.sendMessage("§7Ungültiger Warp...");
+        if (!player.hasPermission("warpsystem.setwarp") ||
+                !player.hasPermission("warpsystem.*") ||
+                !player.isOp() ||
+                !player.hasPermission("*")) {
+            player.sendMessage(PrimaryColor + " Du hast keine Berechtigung, " + SecondaryColor + "Warpset " + PrimaryColor + "zu nutzen.");
+            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
+            return true;
+        }
+
+        String warpName = args[0];
+        if (!VALID_NAME_PATTERN.matcher(warpName).matches() || !VALID_NAME_PATTERN.matcher(warpName.toLowerCase()).matches()) {
+            player.sendMessage(PrimaryColor + " Ungültiger Warp...");
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
             return true;
         }
 
         File warpFile = new File(WARP_DIRECTORY + warpName + ".yml");
         if (warpFile.exists()) {
-            player.sendMessage("§7Dieser Warp Existiert bereits...");
+            player.sendMessage(PrimaryColor + " Dieser Warp existiert bereits...");
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
             return true;
         }
@@ -58,11 +72,11 @@ public class SetWarpCommand implements CommandExecutor {
 
         try {
             warpConfig.save(warpFile);
-            player.sendMessage("§7Neuer Warp erfolgreich gesetzt");
+            player.sendMessage(PrimaryColor + " Neuer Warp erfolgreich gesetzt");
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_TRADE, 1f, 1f);
 
         } catch (IOException e) {
-            player.sendMessage("§cEs ist ein fehler aufgetreten...");
+            player.sendMessage(PrimaryColor + " Es ist ein Fehler aufgetreten...");
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
             e.printStackTrace();
         }
