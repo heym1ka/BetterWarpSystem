@@ -1,4 +1,4 @@
-# WarpPlugin - 1.20.1
+# WarpPlugin - 1.20+
 
 ## Why WarpSystem?
 - Free to use 🚀
