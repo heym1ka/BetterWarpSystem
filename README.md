@@ -5,6 +5,7 @@
 - No Credits 💬
 - No Prefixes 🔒
 - No Brodcastmessages 📩
+- Color Codes changeable 🖌️
 
 ## About WarpSystem
 ```yml
