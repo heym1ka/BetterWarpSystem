@@ -1,4 +1,4 @@
-# WarpPlugin - 1.20+
+# WarpSystem - 1.20+
 
 ## Why WarpSystem?
 - Free to use 🚀
@@ -15,5 +15,5 @@ Pl Ver: 1.2.5
 
 Plugin Type: Spigot/Bukkit
 
-Support: larrox.xyz/discord
+Support: larrox.dev/go/support
 ```
