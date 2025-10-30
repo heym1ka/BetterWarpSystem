@@ -1,18 +1,30 @@
 name: WarpSysPlugin
 version: '${project.version}'
-main: dev.larrox.warpsysplugin.WarpSysPlugin
+main: dev.larrox.betterwarpsystem.WarpSysPlugin
 api-version: '1.20'
 author: Larrox
 commands:
   setwarp:
-    description: setze ein Warp
+    description: Set a warp at your current location
     usage: /setwarp <warpname>
   warp:
-    description: teleportiere dich zu einem existierenden warp
+    description: Teleport to a saved warp
     usage: /warp <warpname>
   delwarp:
-    description: Lösche ein Warp
+    description: Delete a saved warp
     usage: /delwarp <warpname>
   warps:
-    description: zeige alle warps an
-    usage: /warp
+    description: Show list of saved warps
+    usage: /warps
+  warpsysreloadconfig:
+    description: Reload plugin configuration
+permissions:
+  warpsystem.setwarp:
+    description: Allows setting warps
+    default: op
+  warpsystem.delete:
+    description: Allows deleting warps
+    default: op
+  warpsystem.*:
+    description: All warp permissions
+    default: op

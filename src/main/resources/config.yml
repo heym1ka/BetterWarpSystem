@@ -1,0 +1,38 @@
+actionbar: true
+sound: true
+message: true
+color:
+  primary: '&7'
+  secondary: '&a'
+
+warps:
+  folder: 'warplocations'
+
+sounds:
+  success: 'ENTITY_VILLAGER_TRADE'
+  fail: 'ENTITY_VILLAGER_NO'
+  delete_confirm: 'BLOCK_ANVIL_PLACE'
+
+confirmation:
+  delete:
+    enabled: true
+    ttl_seconds: 20
+
+messages:
+  reloaded: '&aConfiguration reloaded.'
+  only-player: '&cOnly players can run this command.'
+  no-permission: '&cYou do not have permission to use this command.'
+  invalid-usage: '&cInvalid usage.'
+  warp-exists: '&cA warp with this name already exists.'
+  warp-set: '&aSuccessfully set warp "{warp}".'
+  warp-deleted: '&aWarp "{warp}" deleted successfully.'
+  warp-not-found: '&cNo warp with that name was found.'
+  warp-world-missing: '&cThe world for this warp does not exist.'
+  warps-list-empty: '&cNo warps found.'
+  warps-list-title: '&7Warps: {list}'
+  teleport: '&7You have been teleported to &a{warp}&7.'
+  teleport-actionbar: 'You were teleported to "{warp}"'
+  error: '&cAn error occurred.'
+  delete-confirm: '&ePlease confirm deletion by running: &c/delwarp confirm {warp} &ewithin {seconds}s.'
+  delete-cancelled: '&cDeletion cancelled or timeout.'
+  delete-pending: '&eDeletion pending for warp "{warp}". Use &c/delwarp confirm {warp} &eto confirm.'
