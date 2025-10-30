@@ -77,7 +77,8 @@ messages:
   delete-confirm: '&ePlease confirm deletion: &c/delwarp confirm {warp} &ewithin {seconds}s.'
 ```
 
-> 💡 Use `&` color codes — they’re automatically translated at runtime.
+> [!TIP]
+> Use `&` for your Colorcodes, its mor readable than §.
 
 ---
 
